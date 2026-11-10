@@ -38,7 +38,15 @@ All announcements are off until you turn them on.
 
 ## Other apps on your phone
 
-To find your speech engines, PVS TTS asks Android which installed apps provide a text-to-speech service. It keeps the names and supported languages of those engines on your phone to show them in its lists. It does not read your other apps. The Settings screen has shortcuts that open Android's own battery and accessibility pages. They only open those pages and give the app no access to them.
+To find your speech engines, PVS TTS asks Android which installed apps provide a text-to-speech service. It keeps the names and supported languages of those engines on your phone to show them in its lists. It does not read your other apps. The Settings screen has shortcuts that open Android's own battery and accessibility settings pages. The accessibility shortcut opens Android's own settings, where you can turn the optional sound feedback service on or off (see below).
+
+## Accessibility service (sound feedback)
+
+PVS TTS includes an optional accessibility service named "PVS TTS sound feedback". Its only purpose is to play short sounds for screen reader events, such as a click, a focus change or a scroll, so a blind user can hear what the screen reader is doing. It is off by default. It works only while your spoken screen reader is running and PVS TTS is the text-to-speech engine, and you can turn it off at any time in the app's Settings or in Android's Accessibility settings.
+
+What the service can see: only the type of each event, which way a scroll went, and the class name of the window (for example, whether it is a dialog). It sets canRetrieveWindowContent to false, so Android does not give it screen content: it cannot read text, labels or anything shown on screen.
+
+What it does not do: it does not perform taps, gestures or any other action for you. It does not record or store anything about these events. The app has no INTERNET permission, so nothing can leave your phone. The service is protected by Android's own BIND_ACCESSIBILITY_SERVICE guard, which means only the Android system can connect to it. This guard is not one of the runtime permissions listed above and it does not give the app access to your data.
 
 ## Update checks
 
